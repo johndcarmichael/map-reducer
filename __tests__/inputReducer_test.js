@@ -1,4 +1,4 @@
-const reducer = require('../reducer')
+const reducer = require('../src/reducer')
 
 describe('ensure the reducer reduces', () => {
   test('reduce and 1 key', () => {
