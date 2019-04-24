@@ -68,7 +68,7 @@ console.log(calculated)
 
 The above would log to the console the original input reduced to the format of the given map.
 
-Note that any values and keys not in the map are no longer present
+Note that any values and keys not in the map are no longer present:
 ```json
 {
   "name": "wifi",
