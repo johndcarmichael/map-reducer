@@ -80,14 +80,17 @@ Note that any values and keys not in the map are no longer present
     }
   },
   "prefs": {
-    "radio": 'off',
+    "radio": "off",
     "mode": {
       "sport": {
         "steering": 5,
-        sus: false
+        "sus": false
       },
       "another": [1, 2, 3]
     }
   }
 }
 ```
+
+## Contributions
+Welcome via github
