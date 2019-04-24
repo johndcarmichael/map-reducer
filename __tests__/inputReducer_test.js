@@ -164,4 +164,21 @@ describe('ensure the reducer reduces', () => {
     }
     expect(reducer(input, map)).toEqual(expected)
   })
+
+  test('reduce but starting with array of object', () => {
+    const input = [{
+      a: 123,
+      b: 'hello',
+      c: 'not me'
+    }]
+    const map = [{
+      a: Number,
+      b: String,
+    }]
+    const expected = [{
+      a: 123,
+      b: 'hello'
+    }]
+    expect(reducer(input, map)).toEqual(expected)
+  })
 })
