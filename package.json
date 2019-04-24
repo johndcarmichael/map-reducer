@@ -1,7 +1,7 @@
 {
   "name": "object-reduce-by-map",
   "version": "1.0.0",
-  "description": "Reduce an input object to only the key in the map and ensure the value of the keys match the map given.",
+  "description": "Recursively reduce an object to match a given map.",
   "main": "src/reducer.js",
   "scripts": {
     "test": "jest",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johndcarmichael/map-reducer.git"
+    "url": "git+https://github.com/johndcarmichael/object-reduce-by-map.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/johndcarmichael/map-reducer/issues"
+    "url": "https://github.com/johndcarmichael/object-reduce-by-map/issues"
   },
-  "homepage": "https://github.com/johndcarmichael/map-reducer#readme",
+  "homepage": "https://github.com/johndcarmichael/object-reduce-by-map#readme",
   "devDependencies": {
     "doctoc": "^1.4.0",
     "eslint": "^5.16.0",

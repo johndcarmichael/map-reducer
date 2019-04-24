@@ -10,8 +10,9 @@ Recursively reduce an object to match a given map.
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Example use
+For more working exmaples, please take a look at the tests in this repo.
 ```js
-const mapReducer = require('map-reducer')
+const objectReduceByMap = require('object-reduce-by-map')
 
 // The dynamic input object
 const input = {
@@ -60,7 +61,7 @@ const map = {
 }
 
 // Lastly, reduce the input.
-const calculated = mapReducer(input, map)
+const calculated = objectReduceByMap(input, map)
 
 console.log(calculated)
 ```
@@ -70,22 +71,22 @@ The above would log to the console the original input reduced to the format of t
 Note that any values and keys not in the map are no longer present
 ```json
 {
-  name: 'wifi',
-  opts: {
-    on: false,
-    qty: {
-      pre: 12,
-      post: 10
+  "name": "wifi",
+  "opts": {
+    "on": false,
+    "qty": {
+      "pre": 12,
+      "post": 10
     }
   },
-  prefs: {
-    radio: 'off',
-    mode: {
-      sport: {
-        steering: 5,
+  "prefs": {
+    "radio": 'off',
+    "mode": {
+      "sport": {
+        "steering": 5,
         sus: false
       },
-      another: [1, 2, 3]
+      "another": [1, 2, 3]
     }
   }
 }
