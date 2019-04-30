@@ -55,6 +55,16 @@ const reducerWalk = (input, map) => {
     innerCompare(input[i], map[0], i)
   }
 }
+
+/**
+ * Reduce the input object to match the structure of the map.
+ * Optional pass the options object
+ * @param {object} input An object (or array) to reduce
+ * @param {object} map An object (or array) to compare during reduction
+ * @param {object} options An object of options
+ *                 {keepKeys: Boolean} This ensure all keys in the map are returned with their values or null
+ * @returns {*}
+ */
 const reducer = (input, map, options) => {
   savedOpts = options || savedOpts || {}
   for (let key in input) {
