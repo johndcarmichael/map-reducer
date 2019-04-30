@@ -1,10 +1,11 @@
 {
   "name": "object-reduce-by-map",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Recursively reduce an object to match a given map.",
   "main": "src/reducer.js",
   "scripts": {
     "test": "jest",
+    "install:githooks": "cp ./githooks/* .git/hooks",
     "lint": "eslint ./src",
     "prepublish": "npm run build:readme:toc && npm run lint && npm run test",
     "release": "npm run prepublish && standard-version",
