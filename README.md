@@ -7,10 +7,38 @@ Recursively reduce an object to match a given map.
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
+- [Features](#features)
+- [Entry function](#entry-function)
 - [Example use](#example-use)
 - [Contributions](#contributions)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Features
+ - Reduce a given object to match the structure and leaf data types of a map
+ - Delete non-matching input nodes
+ - Provide options:
+   -  Retain mismatched keys as null opposed to deleting them 
+
+## Entry function
+```js
+/**
+ * Reduce the input object to match the structure of the map.
+ * Optional pass the options object
+ * @param {object} input An object (or array) to reduce
+ * @param {object} map An object (or array) to compare during reduction
+ * @param {object} options An object of options
+ *                 {keepKeys: Boolean} This ensure all keys in the map are returned with their values or null
+ * @returns {*}
+ */
+const reducer = (input, map, options) => {
+  savedOpts = options || savedOpts || {}
+  for (let key in input) {
+    innerCompare(input[key], map[key], input, key)
+  }
+  return input
+}
+```
 
 ## Example use
 For more working exmaples, please take a look at the tests in this repo.
