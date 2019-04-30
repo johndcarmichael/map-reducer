@@ -1,4 +1,6 @@
-function getType (a) {
+let savedOpts
+
+const getType = (a) => {
   if (typeof a === 'function') {
     if (a === Object) {
       return 'object'
@@ -22,7 +24,6 @@ function getType (a) {
   // Catch all
   return typeof a
 }
-
 const innerCompare = (input, map, inputMaster, key) => {
   if (Array.isArray(input)) {
     if (getType(map) === 'array') {
@@ -39,8 +40,14 @@ const innerCompare = (input, map, inputMaster, key) => {
       reducer(input, map)
     }
   }
-  if (getType(map) !== getType(input)) {
+  if (typeof map === 'undefined') {
     delete inputMaster[key]
+  } else if (getType(map) !== getType(input)) {
+    if (savedOpts.keepKeys) {
+      inputMaster[key] = null
+    } else {
+      delete inputMaster[key]
+    }
   }
 }
 const reducerWalk = (input, map) => {
@@ -48,8 +55,8 @@ const reducerWalk = (input, map) => {
     innerCompare(input[i], map[0], i)
   }
 }
-
-const reducer = (input, map) => {
+const reducer = (input, map, options) => {
+  savedOpts = options || savedOpts || {}
   for (let key in input) {
     innerCompare(input[key], map[key], input, key)
   }

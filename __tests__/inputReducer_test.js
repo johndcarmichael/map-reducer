@@ -182,3 +182,59 @@ describe('ensure the reducer reduces', () => {
     expect(reducer(input, map)).toEqual(expected)
   })
 })
+
+describe('use keepKeys in options', () => {
+  it('should keep all keys in simple object', () => {
+    var input = {
+      a: 123,
+      b: 'should be a string'
+    }
+    var map = {
+      a: Number,
+      b: Number
+    }
+
+    expect(reducer(input, map, { keepKeys: true })).toEqual({
+      a: 123,
+      b: null
+    })
+  })
+
+  it('should keep all keys in non-simple object', () => {
+    var input = {
+      a: 123,
+      b: {
+        c: [
+          {
+            name: 'Bob',
+            colour: 'red',
+            age: '32'
+          }
+        ]
+      }
+    }
+    var map = {
+      a: Number,
+      b: {
+        c: [
+          {
+            name: String,
+            age: Number
+          }
+        ]
+      }
+    }
+
+    expect(reducer(input, map, { keepKeys: true })).toEqual({
+      a: 123,
+      b: {
+        c: [
+          {
+            name: 'Bob',
+            age: null
+          }
+        ]
+      }
+    })
+  })
+})
