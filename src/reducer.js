@@ -30,7 +30,7 @@ const innerCompare = (input, map, inputMaster, key) => {
       if (typeof map === 'function') {
         return
       }
-      reducerWalk(input, map)
+      reducerWalk(input, map, inputMaster)
     }
   } else if (typeof input === 'object') {
     if (getType(map) === 'object') {
@@ -50,9 +50,9 @@ const innerCompare = (input, map, inputMaster, key) => {
     }
   }
 }
-const reducerWalk = (input, map) => {
+const reducerWalk = (input, map, inputMaster) => {
   for (let i = 0; i < input.length; ++i) {
-    innerCompare(input[i], map[0], i)
+    innerCompare(input[i], map[0], i, inputMaster)
   }
 }
 
@@ -73,4 +73,38 @@ const reducer = (input, map, options) => {
   return input
 }
 
-module.exports = reducer
+const injectMissingKeys = (input, map) => {
+  for (let key in map) {
+    let mapType = getType(map[key])
+    if (typeof input[key] === 'undefined') {
+      switch (mapType) {
+        case 'object':
+          if (Object.keys(map[key]).length > 0) {
+            input[key] = {}
+            break
+          }
+        case 'array':
+          if (map[key].length > 0) {
+            input[key] = {}
+            break
+          }
+        default:
+          input[key] = null
+      }
+    }
+    if (['object', 'array'].indexOf(mapType) !== -1) {
+      injectMissingKeys(input[key], map[key])
+    }
+  }
+  return input
+}
+
+module.exports = (input, map, options) => {
+  input = reducer(input, map, options)
+  if (savedOpts.keepKeys) {
+    // At this point we have retained all keys as null wherein the said leaf data type was incorrect
+    // The missing keys should now be re-injected
+    input = injectMissingKeys(input, map)
+  }
+  return input
+}

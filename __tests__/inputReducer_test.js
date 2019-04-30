@@ -208,14 +208,18 @@ describe('use keepKeys in options', () => {
           {
             name: 'Bob',
             colour: 'red',
-            age: '32'
           }
         ]
       }
     }
     var map = {
       a: Number,
+      a1: String,
+      a2: Number,
+      a3: [],
+      a4: Number,
       b: {
+        bA: String,
         c: [
           {
             name: String,
@@ -227,7 +231,12 @@ describe('use keepKeys in options', () => {
 
     expect(reducer(input, map, { keepKeys: true })).toEqual({
       a: 123,
+      a1: null,
+      a2: null,
+      a3: null,
+      a4: null,
       b: {
+        bA: null,
         c: [
           {
             name: 'Bob',
