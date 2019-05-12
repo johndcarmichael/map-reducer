@@ -67,14 +67,14 @@ const reducerWalk = (input, map, inputMaster) => {
  */
 const reducer = (input, map, options) => {
   savedOpts = options || savedOpts || {}
-  for (let key in input) {
-    innerCompare(input[key], map[key], input, key)
-  }
+  Object.keys(input).forEach(function (item) {
+    innerCompare(input[item], map[item], input, item)
+  })
   return input
 }
 
 const injectMissingKeys = (input, map) => {
-  for (let key in map) {
+  Object.keys(map).forEach(function (key) {
     let mapType = getType(map[key])
     if (typeof input[key] === 'undefined') {
       switch (mapType) {
@@ -95,7 +95,7 @@ const injectMissingKeys = (input, map) => {
     if (['object', 'array'].indexOf(mapType) !== -1) {
       injectMissingKeys(input[key], map[key])
     }
-  }
+  })
   return input
 }
 
