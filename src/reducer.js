@@ -100,7 +100,7 @@ const injectMissingKeys = (input, map) => {
 }
 
 module.exports = (input, map, options) => {
-  input = reducer(input, map, options)
+  input = reducer(JSON.parse(JSON.stringify(input)), map, options)
   if (savedOpts.keepKeys) {
     // At this point we have retained all keys as null wherein the said leaf data type was incorrect
     // The missing keys should now be re-injected
