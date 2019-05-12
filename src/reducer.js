@@ -67,14 +67,14 @@ const reducerWalk = (input, map, inputMaster) => {
  */
 const reducer = (input, map, options) => {
   savedOpts = options || savedOpts || {}
-  for (let key in input) {
-    innerCompare(input[key], map[key], input, key)
-  }
+  Object.keys(input).forEach(function (item) {
+    innerCompare(input[item], map[item], input, item)
+  })
   return input
 }
 
 const injectMissingKeys = (input, map) => {
-  for (let key in map) {
+  Object.keys(map).forEach(function (key) {
     let mapType = getType(map[key])
     if (typeof input[key] === 'undefined') {
       switch (mapType) {
@@ -95,12 +95,12 @@ const injectMissingKeys = (input, map) => {
     if (['object', 'array'].indexOf(mapType) !== -1) {
       injectMissingKeys(input[key], map[key])
     }
-  }
+  })
   return input
 }
 
 module.exports = (input, map, options) => {
-  input = reducer(input, map, options)
+  input = reducer(JSON.parse(JSON.stringify(input)), map, options)
   if (savedOpts.keepKeys) {
     // At this point we have retained all keys as null wherein the said leaf data type was incorrect
     // The missing keys should now be re-injected
