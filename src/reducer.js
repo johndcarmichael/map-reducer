@@ -7,15 +7,15 @@ let savedOpts
  */
 const getType = (a) => {
   if (typeof a === 'function') {
-    if (a === Object) {
+    if (a === Object || a === 'Object') {
       return 'object'
-    } else if (a === Array) {
+    } else if (a === Array || a === 'Array') {
       return 'array'
-    } else if (a === String) {
+    } else if (a === String || a === 'String') {
       return 'string'
-    } else if (a === Number) {
+    } else if (a === Number || a === 'Number') {
       return 'number'
-    } else if (a === Boolean) {
+    } else if (a === Boolean || a === 'Boolean') {
       return 'boolean'
     }
   }
