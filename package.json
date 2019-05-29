@@ -8,7 +8,6 @@
     "install:githooks": "cp ./githooks/* .git/hooks",
     "lint": "eslint ./src",
     "prepublish": "npm run build:readme:toc && npm run lint && npm run test",
-    "release": "npm run prepublish && standard-version",
     "build:readme:toc": "node ./node_modules/doctoc/doctoc.js ."
   },
   "repository": {
