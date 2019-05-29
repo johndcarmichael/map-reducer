@@ -1,5 +1,10 @@
 let savedOpts
 
+/**
+ * Returns the type of the first param given
+ * @param a
+ * @return {string|"undefined"|"object"|"boolean"|"number"|"string"|"function"|"symbol"|"bigint"}
+ */
 const getType = (a) => {
   if (typeof a === 'function') {
     if (a === Object) {
@@ -100,6 +105,14 @@ const injectMissingKeys = (input, map) => {
 }
 
 module.exports = (input, map, options) => {
+  // prep
+  if (getType(input) === 'array' && getType(map) === 'array') {
+    input.forEach((item, index) => {
+      if(index > 0){
+        map.push(map[0])
+      }
+    })
+  }
   input = reducer(JSON.parse(JSON.stringify(input)), map, options)
   if (savedOpts.keepKeys) {
     // At this point we have retained all keys as null wherein the said leaf data type was incorrect

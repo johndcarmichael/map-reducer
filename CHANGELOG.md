@@ -1,3 +1,22 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Change Log](#change-log)
+- [1.3.0 (2019-05-12)](#130-2019-05-12)
+    - [Features](#features)
+- [1.1.0 (2019-04-30)](#110-2019-04-30)
+    - [Features](#features-1)
+- [1.2.0 (2019-04-30)](#120-2019-04-30)
+    - [Bug Fixes](#bug-fixes)
+    - [Features](#features-2)
+- [1.1.0 (2019-04-30)](#110-2019-04-30-1)
+    - [Features](#features-3)
+- [1.1.0 (2019-04-30)](#110-2019-04-30-2)
+    - [Features](#features-4)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Change Log
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
