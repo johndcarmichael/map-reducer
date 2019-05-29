@@ -108,7 +108,7 @@ module.exports = (input, map, options) => {
   // prep
   if (getType(input) === 'array' && getType(map) === 'array') {
     input.forEach((item, index) => {
-      if(index > 0){
+      if (index > 0) {
         map.push(map[0])
       }
     })
