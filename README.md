@@ -1,4 +1,4 @@
-# map-reducer
+# object-reduce-by-map
 Recursively reduce an object to match a given map.
 
 [![Build Status](https://travis-ci.org/johndcarmichael/object-reduce-by-map.svg?branch=master)](https://travis-ci.org/johndcarmichael/object-reduce-by-map) | [![Dependencies](https://david-dm.org/johndcarmichael/object-reduce-by-map.svg)](https://david-dm.org/johndcarmichael/object-reduce-by-map) | [![License](http://img.shields.io/npm/l/object-reduce-by-map.svg)](https://github.com/johndcarmichael/object-reduce-by-map/blob/master/LICENSE)
