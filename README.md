@@ -10,6 +10,7 @@ Recursively reduce an object to match a given map.
 - [Features](#features)
 - [Entry function](#entry-function)
 - [Example use](#example-use)
+- [Last publish reason](#last-publish-reason)
 - [Contributions](#contributions)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -122,6 +123,9 @@ Note that any values and keys not in the map are no longer present:
   }
 }
 ```
+
+## Last publish reason
+> DevDependency updates from security alerts by GitHub
 
 ## Contributions
 Welcome via github

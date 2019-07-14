@@ -29,6 +29,14 @@ const getType = (a) => {
   // Catch all
   return typeof a
 }
+
+/**
+ *
+ * @param input
+ * @param map
+ * @param inputMaster
+ * @param key
+ */
 const innerCompare = (input, map, inputMaster, key) => {
   if (Array.isArray(input)) {
     if (getType(map) === 'array') {
@@ -55,6 +63,13 @@ const innerCompare = (input, map, inputMaster, key) => {
     }
   }
 }
+
+/**
+ * Walks over an array running the innerCompare
+ * @param input
+ * @param map
+ * @param inputMaster
+ */
 const reducerWalk = (input, map, inputMaster) => {
   for (let i = 0; i < input.length; ++i) {
     innerCompare(input[i], map[0], i, inputMaster)
@@ -63,12 +78,11 @@ const reducerWalk = (input, map, inputMaster) => {
 
 /**
  * Reduce the input object to match the structure of the map.
- * Optional pass the options object
- * @param {object} input An object (or array) to reduce
- * @param {object} map An object (or array) to compare during reduction
- * @param {object} options An object of options
- *                 {keepKeys: Boolean} This ensure all keys in the map are returned with their values or null
- * @returns {*}
+ * @param {object|array} input - The input array or object
+ * @param {object|array} map - The map to validate the input against
+ * @param {object} [options] - Options object for the package
+ * @param {boolean} [options.keepKeys] - If true will retain the keys opposed to stripping out, their values will be null
+ * @return {*}
  */
 const reducer = (input, map, options) => {
   savedOpts = options || savedOpts || {}
@@ -78,9 +92,15 @@ const reducer = (input, map, options) => {
   return input
 }
 
+/**
+ * Injects missing keys from the input based on the provided map
+ * @param {object|array} input - The input array or object
+ * @param {object|array} map - The map to validate the input against
+ * @return {*}
+ */
 const injectMissingKeys = (input, map) => {
   Object.keys(map).forEach(function (key) {
-    let mapType = getType(map[key])
+    const mapType = getType(map[key])
     if (typeof input[key] === 'undefined') {
       switch (mapType) {
         case 'object':
@@ -104,9 +124,20 @@ const injectMissingKeys = (input, map) => {
   return input
 }
 
-module.exports = (input, map, options) => {
+/**
+ * Main package export function
+ * @param {object|array} input - The input array or object
+ * @param {object|array} map - The map to validate the input against
+ * @param {object} [options] - Options object for the package
+ * @param {boolean} [options.keepKeys] - If true will retain the keys opposed to stripping out, their values will be null
+ * @return {*}
+ */
+module.exports = (input, map, options = {}) => {
   // prep
   if (getType(input) === 'array' && getType(map) === 'array') {
+    if (input.length === 0 && !options.keepKeys) {
+      return input
+    }
     input.forEach((item, index) => {
       if (index > 0) {
         map.push(map[0])
