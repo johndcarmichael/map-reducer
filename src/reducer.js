@@ -37,6 +37,7 @@ const getType = (a) => {
  * @param inputMaster
  * @param key
  */
+let alienFound = false
 const innerCompare = (input, map, inputMaster, key) => {
   if (Array.isArray(input)) {
     if (getType(map) === 'array') {
@@ -54,6 +55,7 @@ const innerCompare = (input, map, inputMaster, key) => {
     }
   }
   if (typeof map === 'undefined') {
+    alienFound = true
     delete inputMaster[key]
   } else if (getType(map) !== getType(input)) {
     if (savedOpts.keepKeys) {
@@ -130,6 +132,7 @@ const injectMissingKeys = (input, map) => {
  * @param {object|array} map - The map to validate the input against
  * @param {object} [options] - Options object for the package
  * @param {boolean} [options.keepKeys] - If true will retain the keys opposed to stripping out, their values will be null
+ * @param {boolean} [options.throwErrorOnAlien] - If true will throw an error when an alien key is found instead of just deleting it
  * @return {*}
  */
 module.exports = (input, map, options = {}) => {
@@ -145,6 +148,9 @@ module.exports = (input, map, options = {}) => {
     })
   }
   input = reducer(JSON.parse(JSON.stringify(input)), map, options)
+  if (options.throwErrorOnAlien && alienFound) {
+    throw new Error('Alien entry found in object')
+  }
   if (savedOpts.keepKeys) {
     // At this point we have retained all keys as null wherein the said leaf data type was incorrect
     // The missing keys should now be re-injected
