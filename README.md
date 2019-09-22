@@ -125,7 +125,8 @@ Note that any values and keys not in the map are no longer present:
 ```
 
 ## Last publish reason
-> DevDependency updates from security alerts by GitHub
+> Types added
+
 
 ## Contributions
 Welcome via github
