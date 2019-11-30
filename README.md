@@ -13,7 +13,7 @@ Recursively reduce an object to match a given map.
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Features
- - Reduce a given object to match the structure and leaf data types of a map
+ - Reduce a given object to match the structure and leaf data types of a given map
  - Delete non-matching input nodes
  - Optionally throw an error for non-matching nodes with throwErrorOnAlien
  - Provide options:
