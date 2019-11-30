@@ -15,7 +15,7 @@
     "url": "git+https://github.com/johndcarmichael/object-reduce-by-map.git"
   },
   "author": "John Carmichael",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/johndcarmichael/object-reduce-by-map/issues"
   },
