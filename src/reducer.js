@@ -88,8 +88,10 @@ const reducerWalk = (input, map, inputMaster) => {
  */
 const reducer = (input, map, options) => {
   savedOpts = options || savedOpts || {}
-  Object.keys(input).forEach(function (item) {
-    innerCompare(input[item], map[item], input, item)
+  Object.keys(input).forEach(function (key) {
+    if (input[key] !== null) {
+      innerCompare(input[key], map[key], input, key)
+    }
   })
   return input
 }
