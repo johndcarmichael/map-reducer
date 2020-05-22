@@ -138,6 +138,9 @@ const injectMissingKeys = (input, map) => {
  * @return {*}
  */
 module.exports = (input, map, options = {}) => {
+  if (typeof input === 'undefined' || input === null) {
+    return input;
+  }
   // prep
   if (getType(input) === 'array' && getType(map) === 'array') {
     if (input.length === 0 && !options.keepKeys) {
