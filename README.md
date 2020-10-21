@@ -23,7 +23,7 @@ Recursively reduce an object to match a given map.
    -  throwErrorOnAlien: Throw error on alien found
 
 ## Breaking changes 1 -> 2
-In version 1 a bug was discovered that permitted alien keys of null value into the output. This has now been resolved however may cause any tools using this helper tool to break, hunce the major version bump.
+In version 1 a bug was discovered that permitted alien keys of null value into the output. This has now been resolved however may cause any tools using this helper tool to break, hence the major version bump.
 
 ## Example use as an API output transformer
 An example use case of this package can be found in the TypeScript openapi-nodegen templates as an output transformer: [openapi-nodegen-typescript-server](https://github.com/acrontum/openapi-nodegen-typescript-server/blob/master/src/http/nodegen/routes/___op.ts.njk#L31)
