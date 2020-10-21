@@ -8,8 +8,9 @@ Recursively reduce an object to match a given map.
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Features](#features)
+- [Breaking changes 1 -> 2](#breaking-changes-1---2)
 - [Example use as an API output transformer](#example-use-as-an-api-output-transformer)
-- [Example use](#example-use)
+- [Example usages](#example-usages)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -21,94 +22,11 @@ Recursively reduce an object to match a given map.
    -  keepKeys: Retain mismatched keys as null opposed to deleting them 
    -  throwErrorOnAlien: Throw error on alien found
 
+## Breaking changes 1 -> 2
+In version 1 a bug was discovered that permitted alien keys of null value into the output. This has now been resolved however may cause any tools using this helper tool to break, hunce the major version bump.
+
 ## Example use as an API output transformer
 An example use case of this package can be found in the TypeScript openapi-nodegen templates as an output transformer: [openapi-nodegen-typescript-server](https://github.com/acrontum/openapi-nodegen-typescript-server/blob/master/src/http/nodegen/routes/___op.ts.njk#L31)
 
-## Example use
-For more working exmaples, please take a look at the tests in this repo.
-```js
-const objectReduceByMap = require('object-reduce-by-map')
-
-// The dynamic input object
-const input = {
-  name: 'wifi',
-  version: '.1.0.0',
-  opts: {
-    on: false,
-    qty: {
-      pre: 12,
-      post: 10
-    }
-  },
-  prefs: {
-    radio: 'off',
-    gps: 'on',
-    mode: {
-      sport: {
-        steering: 5,
-        sus: false
-      },
-      normal: {
-        steering: 3,
-        sus: 'comfort'
-      },
-      another: [1, 2, 3]
-    }
-  }
-}
-
-// The map the input object's structure should match
-const map = {
-  name: String,
-  opts: Object,
-  prefs: {
-    radio: String,
-    mode: {
-      sport: {
-        steering: Number,
-        sus: Boolean
-      },
-      another: [
-        Number
-      ]
-    }
-  }
-}
-
-// Lastly, reduce the input.
-const calculated = objectReduceByMap(input, map)
-
-// Pass options
-const calculatedWithOptions = objectReduceByMap(input, map, {
-  keepKeys: true,
-  throwErrorOnAlien: true
-})
-
-console.log(calculated)
-```
-
-The above would log to the console the original input reduced to the format of the given map.
-
-Note that any values and keys not in the map are no longer present:
-```json
-{
-  "name": "wifi",
-  "opts": {
-    "on": false,
-    "qty": {
-      "pre": 12,
-      "post": 10
-    }
-  },
-  "prefs": {
-    "radio": "off",
-    "mode": {
-      "sport": {
-        "steering": 5,
-        "sus": false
-      },
-      "another": [1, 2, 3]
-    }
-  }
-}
-```
+## Example usages
+The most up to date examples can always be [found in the tests](https://github.com/johndcarmichael/object-reduce-by-map/tree/master/__tests__)

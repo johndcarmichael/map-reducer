@@ -38,26 +38,31 @@ const getType = (a) => {
  * @param key
  */
 let alienFound = false
-const innerCompare = (input, map, inputMaster, key) => {
+const innerCompare = (input, mapItem, inputMaster, key) => {
+  // recursively iterate of the array found
   if (Array.isArray(input)) {
-    if (getType(map) === 'array') {
-      if (typeof map === 'function') {
+    if (getType(mapItem) === 'array') {
+      if (typeof mapItem === 'function') {
         return
       }
-      reducerWalk(input, map, inputMaster)
-    }
-  } else if (typeof input === 'object') {
-    if (getType(map) === 'object') {
-      if (typeof map === 'function') {
-        return
-      }
-      reducer(input, map)
+      reducerWalk(input, mapItem, inputMaster)
     }
   }
-  if (typeof map === 'undefined') {
+  // recursively walk over the object found
+  else if (typeof input === 'object') {
+    if (getType(mapItem) === 'object') {
+      if (typeof mapItem === 'function') {
+        return
+      }
+      reducer(input, mapItem)
+    }
+  }
+
+  if (typeof mapItem === 'undefined') {
     alienFound = true
     delete inputMaster[key]
-  } else if (getType(map) !== getType(input)) {
+  }
+  else if (getType(mapItem) !== getType(input)) {
     if (savedOpts.keepKeys) {
       inputMaster[key] = null
     } else {
@@ -89,9 +94,7 @@ const reducerWalk = (input, map, inputMaster) => {
 const reducer = (input, map, options) => {
   savedOpts = options || savedOpts || {}
   Object.keys(input).forEach(function (key) {
-    if (input[key] !== null) {
-      innerCompare(input[key], map[key], input, key)
-    }
+    innerCompare(input[key], map[key], input, key)
   })
   return input
 }

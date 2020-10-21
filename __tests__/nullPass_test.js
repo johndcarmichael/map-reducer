@@ -9,23 +9,47 @@ const map = {
   topFiveRatio: Number,
   mostRecentRank: {
     event: {
-      eventSeriesId: String,
-      parentEvent: String,
-      name: String,
-      date: { from: String, to: String },
       locations: [{ country: String, city: String, timezone: String }],
-      sport: String,
-      discipline: String,
-      photo: String,
-      _id: String
     },
     rank: Number
   },
   bestRank: Number
 }
 
-it('Should handle null leaf values ', () => {
-  const input = {
+const input = {
+  thisShouldNotBeInTheOutput: null,
+  starts: 0,
+  wins: 0,
+  secondPlaces: 0,
+  thirdPlaces: 0,
+  topFives: 0,
+  topFiveRatio: null,
+  mostRecentRank: {
+    event: {
+      locations: [{
+        country: null
+      }]
+    }
+  },
+  bestRank: null
+}
+
+it('Should handle null leaf values ie remove them', () => {
+  expect(reducer(input, map)).toEqual({
+    starts: 0,
+    wins: 0,
+    secondPlaces: 0,
+    thirdPlaces: 0,
+    topFives: 0,
+    mostRecentRank: {
+      event: {
+        locations: [{}]
+      }
+    },
+  })
+})
+it('Should handle null leaf values but keep them in the output as null', () => {
+  expect(reducer(input, map, {keepKeys: true})).toEqual({
     starts: 0,
     wins: 0,
     secondPlaces: 0,
@@ -35,11 +59,13 @@ it('Should handle null leaf values ', () => {
     mostRecentRank: {
       event: {
         locations: [{
-          country: null
+          city: null,
+          country: null,
+          timezone: null
         }]
-      }
+      },
+      rank: null
     },
     bestRank: null
-  }
-  expect(reducer(input, map)).toEqual(input)
+  })
 })
