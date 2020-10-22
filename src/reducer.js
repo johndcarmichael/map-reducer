@@ -143,11 +143,11 @@ const injectMissingKeys = (input, map) => {
  */
 module.exports = (input, map, options = {}) => {
   if (typeof input === 'undefined' || input === null) {
-    if (options.allowNullish){
-      return input;
+    if (options.allowNullish) {
+      return input
     }
 
-    throw new Error(`object-reduce-by-map: array or object expected, received type '${input}'. Overried with option allowNullish`);
+    throw new Error(`object-reduce-by-map: array or object expected, received type '${input}'. Overried with option allowNullish`)
   }
   // prep
   if (getType(input) === 'array' && getType(map) === 'array') {

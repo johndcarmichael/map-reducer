@@ -49,7 +49,7 @@ it('Should handle null leaf values ie remove them', () => {
   })
 })
 it('Should handle null leaf values but keep them in the output as null', () => {
-  expect(reducer(input, map, {keepKeys: true})).toEqual({
+  expect(reducer(input, map, { keepKeys: true })).toEqual({
     starts: 0,
     wins: 0,
     secondPlaces: 0,
@@ -68,4 +68,35 @@ it('Should handle null leaf values but keep them in the output as null', () => {
     },
     bestRank: null
   })
+})
+
+it('should not error when undefined passed with allow nullish', (done) => {
+  reducer(undefined, map, {
+    allowNullish: true
+  })
+  done()
+})
+
+it('should not error when null passed with allow nullish', (done) => {
+  reducer(null, map, {
+    allowNullish: true
+  })
+  done()
+})
+
+it('should not error when null passed with allow nullish', (done) => {
+  try {
+    reducer(null, map)
+    done('Should have errored')
+  } catch (e) {
+    done()
+  }
+})
+it('should not error when null passed with allow nullish', (done) => {
+  try {
+    reducer(undefined, map)
+    done('Should have errored')
+  } catch (e) {
+    done()
+  }
 })
