@@ -135,11 +135,16 @@ const injectMissingKeys = (input, map) => {
  * @param {object} [options] - Options object for the package
  * @param {boolean} [options.keepKeys] - If true will retain the keys opposed to stripping out, their values will be null
  * @param {boolean} [options.throwErrorOnAlien] - If true will throw an error when an alien key is found instead of just deleting it
+ * @param {boolean} [options.allowNullish] - If true, will pass null or undefined through
  * @return {*}
  */
 module.exports = (input, map, options = {}) => {
   if (typeof input === 'undefined' || input === null) {
-    return input;
+    if (options.allowNullish){
+      return input;
+    }
+
+    throw new Error(`object-reduce-by-map: array or object expected, received type '${input}'. Overried with option allowNullish`);
   }
   // prep
   if (getType(input) === 'array' && getType(map) === 'array') {
