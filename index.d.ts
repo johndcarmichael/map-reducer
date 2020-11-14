@@ -10,5 +10,10 @@ interface Options {
    * Bool if true will throw an error when an alien attribute is found
    */
   throwErrorOnAlien?: boolean,
+
+  /**
+   * If true, will pass null or undefined through
+   */
+  allowNullish?: boolean
 }
 export default function(input: object, map: object, options?: Options): object
