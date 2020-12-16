@@ -49,7 +49,7 @@ const innerCompare = (input, mapItem, inputMaster, key) => {
     }
   }
   // recursively walk over the object found
-  else if (typeof input === 'object') {
+  else if (input !== null && typeof input === 'object') {
     if (getType(mapItem) === 'object') {
       if (typeof mapItem === 'function') {
         return
@@ -62,7 +62,7 @@ const innerCompare = (input, mapItem, inputMaster, key) => {
     alienFound = true
     delete inputMaster[key]
   }
-  else if (getType(mapItem) !== getType(input)) {
+  else if (input === null || getType(mapItem) !== getType(input)) {
     if (savedOpts.keepKeys) {
       inputMaster[key] = null
     } else {
