@@ -26,7 +26,9 @@ describe('Test passing null keys through', () => {
       type: 'test',
     };
 
+
     expect(reducer(testInput, map, defaultOptions)).toEqual(testInput);
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: true })).toEqual({
       id: 10,
       date: '1970-01-01',
@@ -34,6 +36,7 @@ describe('Test passing null keys through', () => {
       health: null,
       wear: null,
     });
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: true, allowNullishKeys: true })).toEqual({
       id: 10,
       date: '1970-01-01',
@@ -41,6 +44,7 @@ describe('Test passing null keys through', () => {
       health: null,
       wear: null,
     });
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: false, allowNullishKeys: true })).toEqual(testInput);
   });
 
@@ -51,10 +55,12 @@ describe('Test passing null keys through', () => {
       type: null,
     };
 
+
     expect(reducer(testInput, map, defaultOptions)).toEqual({
       id: 10,
       date: '1970-01-01',
     });
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: true })).toEqual({
       id: 10,
       date: '1970-01-01',
@@ -62,6 +68,7 @@ describe('Test passing null keys through', () => {
       health: null,
       wear: null,
     });
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: true, allowNullishKeys: true })).toEqual({
       id: 10,
       date: '1970-01-01',
@@ -69,6 +76,7 @@ describe('Test passing null keys through', () => {
       health: null,
       wear: null,
     });
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: false, allowNullishKeys: true })).toEqual(testInput);
   });
 
@@ -79,10 +87,12 @@ describe('Test passing null keys through', () => {
       type: undefined,
     };
 
+
     expect(reducer(testInput, map, defaultOptions)).toEqual({
       id: 10,
       date: '1970-01-01',
     });
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: true })).toEqual({
       id: 10,
       date: '1970-01-01',
@@ -90,6 +100,7 @@ describe('Test passing null keys through', () => {
       health: null,
       wear: null,
     });
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: true, allowNullishKeys: true })).toEqual({
       id: 10,
       date: '1970-01-01',
@@ -97,6 +108,7 @@ describe('Test passing null keys through', () => {
       health: null,
       wear: null,
     });
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: false, allowNullishKeys: true })).toEqual({
       id: 10,
       date: '1970-01-01',
@@ -110,10 +122,12 @@ describe('Test passing null keys through', () => {
       test: 10,
     };
 
+
     expect(reducer(testInput, map, defaultOptions)).toEqual({
       id: 10,
       date: '1970-01-01',
     });
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: true })).toEqual({
       id: 10,
       date: '1970-01-01',
@@ -121,6 +135,7 @@ describe('Test passing null keys through', () => {
       health: null,
       wear: null,
     });
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: true, allowNullishKeys: true })).toEqual({
       id: 10,
       date: '1970-01-01',
@@ -128,6 +143,7 @@ describe('Test passing null keys through', () => {
       health: null,
       wear: null,
     });
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: false, allowNullishKeys: true })).toEqual({
       id: 10,
       date: '1970-01-01',
@@ -137,20 +153,28 @@ describe('Test passing null keys through', () => {
   it('handles null', () => {
     const testInput = null;
 
+
     expect(reducer(testInput, map, defaultOptions)).toEqual(testInput);
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: true })).toEqual(testInput);
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: true, allowNullishKeys: true })).toEqual(testInput);
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: false, allowNullishKeys: true })).toEqual(testInput);
   });
 
   it('handles empty object', () => {
     const testInput = {};
 
+
     expect(reducer(testInput, map, defaultOptions)).toEqual(testInput);
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: true })).toEqual(mapWithNullValues);
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: true, allowNullishKeys: true })).toEqual(
       mapWithNullValues
     );
+
     expect(reducer(testInput, map, { ...defaultOptions, keepKeys: false, allowNullishKeys: true })).toEqual(testInput);
   });
 
