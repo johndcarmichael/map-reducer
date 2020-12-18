@@ -37,19 +37,15 @@ const getType = (a) => {
  * @param inputMaster
  * @param key
  */
-let alienFound = false
 const innerCompare = (input, mapItem, inputMaster, key) => {
-  // recursively iterate of the array found
-  if (Array.isArray(input)) {
+  if (Array.isArray(input)) { // recursively iterate of the array found
     if (getType(mapItem) === 'array') {
       if (typeof mapItem === 'function') {
         return
       }
       reducerWalk(input, mapItem, inputMaster)
     }
-  }
-  // recursively walk over the object found
-  else if (input !== null && typeof input === 'object') {
+  } else if (String(input) === '[object Object]') { // recursively walk over the object found
     if (getType(mapItem) === 'object') {
       if (typeof mapItem === 'function') {
         return
@@ -57,12 +53,18 @@ const innerCompare = (input, mapItem, inputMaster, key) => {
       reducer(input, mapItem)
     }
   }
-
   if (typeof mapItem === 'undefined') {
-    alienFound = true
+    if (savedOpts.throwErrorOnAlien) {
+      throw new Error('Alien entry found in object')
+    }
     delete inputMaster[key]
-  }
-  else if (input === null || getType(mapItem) !== getType(input)) {
+  } else if (input == null || typeof input === 'undefined') {
+    if (savedOpts.allowNullishKeys) {
+      inputMaster[key] = input
+    } else {
+      delete inputMaster[key]
+    }
+  } else if (getType(mapItem) !== getType(input)) {
     if (savedOpts.keepKeys) {
       inputMaster[key] = null
     } else {
@@ -161,9 +163,6 @@ module.exports = (input, map, options = {}) => {
     })
   }
   input = reducer(JSON.parse(JSON.stringify(input)), map, options)
-  if (options.throwErrorOnAlien && alienFound) {
-    throw new Error('Alien entry found in object')
-  }
   if (savedOpts.keepKeys) {
     // At this point we have retained all keys as null wherein the said leaf data type was incorrect
     // The missing keys should now be re-injected
