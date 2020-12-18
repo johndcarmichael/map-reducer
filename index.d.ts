@@ -15,5 +15,11 @@ interface Options {
    * If true, will pass null or undefined through
    */
   allowNullish?: boolean
+
+  /**
+   * If true, will pass null or undefined keys through
+   */
+  allowNullishKeys?: boolean
 }
+
 export default function(input: object, map: object, options?: Options): object
